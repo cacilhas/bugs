@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cn3v5buqxx1a7"]
+[gd_scene load_steps=8 format=3 uid="uid://cn3v5buqxx1a7"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_3nncy"]
 [ext_resource type="PackedScene" uid="uid://c2j5olbwgwb4y" path="res://predator.tscn" id="2_8ihjq"]
@@ -15,18 +15,6 @@ albedo_color = Color(0, 1, 0.364706, 1)
 material = SubResource("StandardMaterial3D_bts7t")
 size = Vector3(500, 0.1, 500)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_v6m3e"]
-size = Vector3(500, 5, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_je5ru"]
-size = Vector3(500, 5, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_d18qd"]
-size = Vector3(1, 5, 510)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_nj5x4"]
-size = Vector3(1, 5, 510)
-
 [node name="Main" type="Node3D"]
 script = ExtResource("1_3nncy")
 PredatorScene = ExtResource("2_8ihjq")
@@ -40,22 +28,6 @@ shape = SubResource("BoxShape3D_o1n5f")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Boundaries"]
 mesh = SubResource("BoxMesh_lokc4")
-
-[node name="Wall_N" type="CollisionShape3D" parent="Boundaries"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0945511, 0.540077, -250.368)
-shape = SubResource("BoxShape3D_v6m3e")
-
-[node name="Wall_S" type="CollisionShape3D" parent="Boundaries"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 250)
-shape = SubResource("BoxShape3D_je5ru")
-
-[node name="Wall_E" type="CollisionShape3D" parent="Boundaries"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 250, 0, 0)
-shape = SubResource("BoxShape3D_d18qd")
-
-[node name="Wall_W" type="CollisionShape3D" parent="Boundaries"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -250, 0, 0)
-shape = SubResource("BoxShape3D_nj5x4")
 
 [node name="Camera" type="Camera3D" parent="."]
 unique_name_in_owner = true
