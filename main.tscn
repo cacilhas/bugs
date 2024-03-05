@@ -1,0 +1,133 @@
+[gd_scene load_steps=12 format=3 uid="uid://cn3v5buqxx1a7"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_3nncy"]
+[ext_resource type="PackedScene" uid="uid://c2j5olbwgwb4y" path="res://predator.tscn" id="2_8ihjq"]
+[ext_resource type="PackedScene" uid="uid://bil4npkbxb2u1" path="res://prey.tscn" id="3_td1ov"]
+[ext_resource type="FontFile" uid="uid://ct4gjy417a0ur" path="res://assets/acme.ttf" id="4_six8u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o1n5f"]
+size = Vector3(500, 0.1, 500)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bts7t"]
+albedo_color = Color(0, 1, 0.364706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lokc4"]
+material = SubResource("StandardMaterial3D_bts7t")
+size = Vector3(500, 0.1, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v6m3e"]
+size = Vector3(500, 5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_je5ru"]
+size = Vector3(500, 5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d18qd"]
+size = Vector3(1, 5, 510)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nj5x4"]
+size = Vector3(1, 5, 510)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_3nncy")
+PredatorScene = ExtResource("2_8ihjq")
+PreyScene = ExtResource("3_td1ov")
+
+[node name="Boundaries" type="StaticBody3D" parent="."]
+
+[node name="Floor" type="CollisionShape3D" parent="Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("BoxShape3D_o1n5f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boundaries"]
+mesh = SubResource("BoxMesh_lokc4")
+
+[node name="Wall_N" type="CollisionShape3D" parent="Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0945511, 0.540077, -250.368)
+shape = SubResource("BoxShape3D_v6m3e")
+
+[node name="Wall_S" type="CollisionShape3D" parent="Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 250)
+shape = SubResource("BoxShape3D_je5ru")
+
+[node name="Wall_E" type="CollisionShape3D" parent="Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 250, 0, 0)
+shape = SubResource("BoxShape3D_d18qd")
+
+[node name="Wall_W" type="CollisionShape3D" parent="Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -250, 0, 0)
+shape = SubResource("BoxShape3D_nj5x4")
+
+[node name="Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 116)
+current = true
+
+[node name="Light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 81.8987, 0)
+omni_range = 399.715
+
+[node name="HUD" type="Control" parent="."]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1278.0
+offset_bottom = 722.0
+
+[node name="Label1" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 137.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_six8u")
+theme_override_font_sizes/font_size = 32
+text = "Predators:"
+
+[node name="Label2" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = 84.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_six8u")
+theme_override_font_sizes/font_size = 32
+text = "Preys:"
+
+[node name="PredatorsCount" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 160.0
+offset_top = 8.0
+offset_right = 320.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_six8u")
+theme_override_font_sizes/font_size = 32
+text = "0
+"
+horizontal_alignment = 2
+
+[node name="PreysCount" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 160.0
+offset_top = 48.0
+offset_right = 320.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_six8u")
+theme_override_font_sizes/font_size = 32
+text = "0
+"
+horizontal_alignment = 2
+
+[connection signal="new_predator" from="." to="." method="_on_new_predator"]
+[connection signal="new_prey" from="." to="." method="_on_new_prey"]
+[connection signal="predator_has_died" from="." to="." method="_on_predator_has_died"]
+[connection signal="prey_has_died" from="." to="." method="_on_prey_has_died"]
