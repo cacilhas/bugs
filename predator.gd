@@ -5,7 +5,7 @@ extends CharacterBody3D
 const SPEED = 5.0
 const ANGLE = PI
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var brain := PackedFloat32Array()
 var reaction := 0
 var age := 0.0
@@ -39,6 +39,10 @@ func _process(delta: float) -> void:
 	if global_position.y < -2 or global_position.y > 5:
 		call_deferred("queue_free")
 
+	if global_position.y > 0.5:
+		reaction = 1
+		return
+
 	var i0 := 1.0 if %RayCast1.is_colliding() else 0.0
 	var i1 := 1.0 if %RayCast2.is_colliding() else 0.0
 	var i2 := 1.0 if %RayCast3.is_colliding() else 0.0
@@ -67,9 +71,6 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-
 	if reaction & 2 > 0:
 		rotate_y(-ANGLE * delta)
 
@@ -84,6 +85,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
+	if not is_on_floor():
+		velocity.y -= gravity * delta
 	move_and_slide()
 
 
@@ -97,5 +100,6 @@ func _on_claw_body_entered(body: Prey) -> void:
 			child.position.x = position.x
 			child.position.z = position.z
 			child.position.y = 2.0
+			child.rotate_y(randf() * TAU)
 			child.add_brain(brain)
 			get_parent().add_child(child)

@@ -412,7 +412,7 @@ _data = {
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_swe76"]
-height = 0.5
+height = 1.0
 radius = 1.0
 
 [node name="Prey" type="CharacterBody3D"]

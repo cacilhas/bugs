@@ -1,22 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://cn3v5buqxx1a7"]
+[gd_scene load_steps=9 format=3 uid="uid://cn3v5buqxx1a7"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_3nncy"]
 [ext_resource type="PackedScene" uid="uid://c2j5olbwgwb4y" path="res://predator.tscn" id="2_8ihjq"]
+[ext_resource type="PackedScene" uid="uid://cqxovfdylgye6" path="res://grass.tscn" id="2_fw8v0"]
 [ext_resource type="PackedScene" uid="uid://bil4npkbxb2u1" path="res://prey.tscn" id="3_td1ov"]
 [ext_resource type="FontFile" uid="uid://ct4gjy417a0ur" path="res://assets/acme.ttf" id="4_six8u"]
+[ext_resource type="Material" path="res://assets/ground.ptres.tres" id="5_e6bjq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o1n5f"]
 size = Vector3(500, 0.1, 500)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bts7t"]
-albedo_color = Color(0, 1, 0.364706, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_lokc4"]
-material = SubResource("StandardMaterial3D_bts7t")
+material = ExtResource("5_e6bjq")
 size = Vector3(500, 0.1, 500)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_3nncy")
+GrassScene = ExtResource("2_fw8v0")
 PredatorScene = ExtResource("2_8ihjq")
 PreyScene = ExtResource("3_td1ov")
 
@@ -34,9 +34,11 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 50)
 current = true
 
-[node name="Light" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 81.8987, 0)
-omni_range = 399.715
+[node name="Light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.923946, 0.382522, 0, -0.382522, 0.923946, 0, 70, 0)
+light_color = Color(1, 1, 0.831373, 1)
+shadow_enabled = true
+directional_shadow_mode = 0
 
 [node name="HUD" type="Control" parent="."]
 custom_minimum_size = Vector2(1280, 720)
