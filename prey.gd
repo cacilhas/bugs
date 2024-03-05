@@ -33,14 +33,18 @@ func _process(delta: float) -> void:
 	if randf() < 0.8:
 		age += delta
 
+	if global_position.y < -2 or global_position.y > 5:
+		call_deferred("queue_free")
+
 	if age > 30:
 		age /= 2.0
-		var child: Prey = Self.instantiate()
-		child.position.x = position.x
-		child.position.z = position.z
-		child.position.y = 2.0
-		child.add_brain(brain)
-		get_parent().add_child(child)
+		if get_parent().can_create_more_preys():
+			var child: Prey = Self.instantiate()
+			child.position.x = position.x
+			child.position.z = position.z
+			child.position.y = 2.0
+			child.add_brain(brain)
+			get_parent().add_child(child)
 
 	var i0 := 1.0 if %RayCast1.is_colliding() else 0.0
 	var i1 := 1.0 if %RayCast2.is_colliding() else 0.0
@@ -88,6 +92,3 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-
-	if global_position.y < -2:
-		call_deferred("queue_free")

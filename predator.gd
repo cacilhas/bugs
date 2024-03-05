@@ -36,6 +36,9 @@ func _process(delta: float) -> void:
 		call_deferred("queue_free")
 		return
 
+	if global_position.y < -2 or global_position.y > 5:
+		call_deferred("queue_free")
+
 	var i0 := 1.0 if %RayCast1.is_colliding() else 0.0
 	var i1 := 1.0 if %RayCast2.is_colliding() else 0.0
 	var i2 := 1.0 if %RayCast3.is_colliding() else 0.0
@@ -83,16 +86,13 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	if global_position.y < -2:
-		call_deferred("queue_free")
-
 
 func _on_claw_body_entered(body: Prey) -> void:
 	if body:
 		body.queue_free()
 		age = 0.0
 
-		if randf() < 0.5:
+		if randf() < 0.5 and get_parent().can_create_more_predators():
 			var child: Predator = Self.instantiate()
 			child.position.x = position.x
 			child.position.z = position.z

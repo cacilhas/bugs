@@ -6,7 +6,7 @@ signal predator_has_died
 signal prey_has_died
 
 
-const SPEED := PI
+const SPEED := 200
 
 @export var PredatorScene: PackedScene
 @export var PreyScene: PackedScene
@@ -17,9 +17,17 @@ var preys_count := 0
 var predators_count := 0
 
 
+func can_create_more_preys() -> bool:
+	return preys_count < 1000
+
+
+func can_create_more_predators() -> bool:
+	return predators_count < 1000
+
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	for i in 100:
+	for i in 500:
 		var prey: Prey = PreyScene.instantiate()
 		prey.position.x = 220.0 - randf()*440.0
 		prey.position.z = 220.0 - randf()*440.0
@@ -64,7 +72,7 @@ func _physics_process(delta: float) -> void:
 	mouse = Vector2.ZERO
 
 	if movement.length_squared() > 0:
-		%Camera.position += movement.rotated(Vector3.UP, %Camera.rotation.y)
+		%Camera.position += movement.rotated(Vector3.UP, %Camera.rotation.y) * SPEED * delta
 	movement = Vector3.ZERO
 
 
