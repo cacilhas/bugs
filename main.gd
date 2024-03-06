@@ -24,24 +24,30 @@ func can_create_more_predators() -> bool:
 	return predators_count < 1000
 
 
+func get_matrix() -> Predator:
+	for child in get_children():
+		if child is Predator:
+			return child
+	return null
+
+
 func recreate_predators() -> void:
 	if preys_count == 0:
 		for _i in 500:
 			add_child(Globals.create_prey())
 
-	if predators_count == 1:
-		for matrix in get_children():
-			if matrix is Predator:
-				matrix.age = 0.0
-				for _i in 99:
-					var pred := Globals.create_predator()
-					pred.add_brain(matrix.brain)
-					add_child(pred)
-				return
+	if predators_count > 0:
+		var matrix := get_matrix()
+		if matrix:
+			matrix.age = 0.0
+			for _i in 99:
+				var pred := matrix.procreate()
+				pred.position = Globals.random_position(480.0)
+				add_child(pred)
+			return
 
-	if predators_count == 0:
-		for _i in 100:
-			add_child(Globals.create_predator())
+	for _i in 100:
+		add_child(Globals.create_predator())
 
 
 

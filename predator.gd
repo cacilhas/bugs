@@ -17,16 +17,16 @@ func add_brain(parent: PackedFloat32Array) -> void:
 	brain = Globals.mutate_brain(parent)
 
 
-func procreate() -> void:
-	var parent := get_parent()
-	if parent.can_create_more_predators():
-		var child: Predator = Self.instantiate()
+func procreate() -> Predator:
+	var child: Predator = null
+	if get_parent().can_create_more_predators():
+		child = Self.instantiate()
 		child.position.x = position.x
 		child.position.z = position.z
 		child.position.y = 2.0
 		child.rotate_y(randf() * TAU)
 		child.add_brain(brain)
-		parent.add_child(child)
+	return child
 
 
 func _ready() -> void:
@@ -114,4 +114,6 @@ func _on_claw_body_entered(body: Prey) -> void:
 			scale *= 1.0625
 
 		if randf() < 0.5:
-			procreate()
+			var child := procreate()
+			if child:
+				get_parent().add_child(child)
