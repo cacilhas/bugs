@@ -20,6 +20,7 @@ func add_brain(parent: PackedFloat32Array) -> void:
 func _ready() -> void:
 	collision_layer = 3
 	collision_mask = 1
+	scale = Vector3.ONE * 0.6
 	var parent := get_parent()
 	parent.new_prey.emit()
 	self.tree_exited.connect(func(): parent.prey_has_died.emit())
@@ -32,6 +33,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if randf() < 0.8:
 		age += delta
+		if scale.x < 1.2:
+			scale *= 1.0 + (0.03125 * delta)
 
 	if global_position.y < -5 or global_position.y > 5:
 		call_deferred("queue_free")
@@ -40,9 +43,10 @@ func _process(delta: float) -> void:
 		reaction = 1
 		return
 
-	if age > 30:
+	if age >= 30:
 		age /= 2.0
 		if get_parent().can_create_more_preys():
+			scale = Vector3.ONE * 0.8
 			var child: Prey = Self.instantiate()
 			child.position.x = position.x
 			child.position.z = position.z
