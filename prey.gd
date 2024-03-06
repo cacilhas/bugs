@@ -68,7 +68,7 @@ func _process(delta: float) -> void:
 	var i3 := 1.0 if %RayCast4.is_colliding() else 0.0
 	var i4 := 1.0 if %RayCast5.is_colliding() else 0.0
 	var i5 := 1.0 if %RayCast6.is_colliding() else 0.0
-	var i6 := 1.0 if %RayCast7.is_colliding() else 0.0
+	var i6 := 0.0 if %RayCast7.is_colliding() else 1.0
 
 	var a0 := 1.0 if 0.0 < i0 * brain[0] + i1 * brain[1] + i2 * brain[2] + i3 * brain[3] + i4 * brain[4] + i5 * brain[49] + i6 * brain[53] else 0.0
 	var a1 := 1.0 if 0.0 < i0 * brain[5] + i1 * brain[6] + i2 * brain[7] + i3 * brain[8] + i4 * brain[9] + i5 * brain[50] + i6 * brain[54] else 0.0
