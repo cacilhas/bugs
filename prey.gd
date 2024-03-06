@@ -25,7 +25,7 @@ func _ready() -> void:
 	self.tree_exited.connect(func(): parent.prey_has_died.emit())
 	%AnimationPlayer.speed_scale = 10
 	if brain.is_empty():
-		for _i in 53:
+		for _i in 57:
 			brain.append(1.0 - randf()*2.0)
 
 
@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 	if randf() < 0.8:
 		age += delta
 
-	if global_position.y < -2 or global_position.y > 5:
+	if global_position.y < -5 or global_position.y > 5:
 		call_deferred("queue_free")
 
 	if global_position.y > 0.5:
@@ -57,11 +57,12 @@ func _process(delta: float) -> void:
 	var i3 := 1.0 if %RayCast4.is_colliding() else 0.0
 	var i4 := 1.0 if %RayCast5.is_colliding() else 0.0
 	var i5 := 1.0 if %RayCast6.is_colliding() else 0.0
+	var i6 := 1.0 if %RayCast7.is_colliding() else 0.0
 
-	var a0: float = max(0, i0 * brain[0] + i1 * brain[1] + i2 * brain[2] + i3 * brain[3] + i4 * brain[4] + i5 * brain[49])
-	var a1: float = max(0, i0 * brain[5] + i1 * brain[6] + i2 * brain[7] + i3 * brain[8] + i4 * brain[9] + i5 * brain[50])
-	var a2: float = max(0, i0 * brain[10] + i1 * brain[11] + i2 * brain[12] + i3 * brain[13] + i4 * brain[14] + i5 * brain[51])
-	var a3: float = max(0, i0 * brain[15] + i1 * brain[16] + i2 * brain[17] + i3 * brain[18] + i4 * brain[19] + i5 * brain[52])
+	var a0: float = max(0, i0 * brain[0] + i1 * brain[1] + i2 * brain[2] + i3 * brain[3] + i4 * brain[4] + i5 * brain[49] + i6 * brain[53])
+	var a1: float = max(0, i0 * brain[5] + i1 * brain[6] + i2 * brain[7] + i3 * brain[8] + i4 * brain[9] + i5 * brain[50] + i6 * brain[54])
+	var a2: float = max(0, i0 * brain[10] + i1 * brain[11] + i2 * brain[12] + i3 * brain[13] + i4 * brain[14] + i5 * brain[51] + i6 * brain[55])
+	var a3: float = max(0, i0 * brain[15] + i1 * brain[16] + i2 * brain[17] + i3 * brain[18] + i4 * brain[19] + i5 * brain[52] + i6 * brain[56])
 
 	var b0: float = max(0, a0 * brain[20] + a1 * brain[21] + a2 * brain[22] + a3 * brain[23])
 	var b1: float = max(0, a0 * brain[24] + a1 * brain[25] + a2 * brain[26] + a3 * brain[27])

@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		call_deferred("queue_free")
 		return
 
-	if global_position.y < -2 or global_position.y > 5:
+	if global_position.y < -5 or global_position.y > 5:
 		call_deferred("queue_free")
 
 	if global_position.y > 0.5:
