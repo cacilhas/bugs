@@ -410,8 +410,7 @@ _data = {
 "Walk": SubResource("Animation_aacuo")
 }
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_4a80f"]
-height = 1.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_jkult"]
 radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ej6rl"]
@@ -642,8 +641,8 @@ libraries = {
 }
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("CylinderShape3D_4a80f")
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_jkult")
 
 [node name="RayCast1" type="RayCast3D" parent="."]
 unique_name_in_owner = true
