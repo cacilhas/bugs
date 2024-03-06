@@ -30,8 +30,8 @@ radius = 500.0
 [sub_resource type="CylinderMesh" id="CylinderMesh_ti6o3"]
 material = ExtResource("5_4b06c")
 top_radius = 500.0
-bottom_radius = 500.0
-height = 0.1
+bottom_radius = 1000.0
+height = 1000.0
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_3nncy")
@@ -49,8 +49,8 @@ camera_attributes = SubResource("CameraAttributesPractical_b1gh6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("CylinderShape3D_coplj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Boundaries"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+[node name="MeshInstance" type="MeshInstance3D" parent="Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -500, 0)
 mesh = SubResource("CylinderMesh_ti6o3")
 
 [node name="Pole" parent="." instance=ExtResource("7_wwpba")]
