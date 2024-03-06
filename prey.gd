@@ -63,18 +63,18 @@ func _process(delta: float) -> void:
 	var i5 := 1.0 if %RayCast6.is_colliding() else 0.0
 	var i6 := 1.0 if %RayCast7.is_colliding() else 0.0
 
-	var a0: float = max(0, i0 * brain[0] + i1 * brain[1] + i2 * brain[2] + i3 * brain[3] + i4 * brain[4] + i5 * brain[49] + i6 * brain[53])
-	var a1: float = max(0, i0 * brain[5] + i1 * brain[6] + i2 * brain[7] + i3 * brain[8] + i4 * brain[9] + i5 * brain[50] + i6 * brain[54])
-	var a2: float = max(0, i0 * brain[10] + i1 * brain[11] + i2 * brain[12] + i3 * brain[13] + i4 * brain[14] + i5 * brain[51] + i6 * brain[55])
-	var a3: float = max(0, i0 * brain[15] + i1 * brain[16] + i2 * brain[17] + i3 * brain[18] + i4 * brain[19] + i5 * brain[52] + i6 * brain[56])
+	var a0 := 1.0 if 0.0 < i0 * brain[0] + i1 * brain[1] + i2 * brain[2] + i3 * brain[3] + i4 * brain[4] + i5 * brain[49] + i6 * brain[53] else 0.0
+	var a1 := 1.0 if 0.0 < i0 * brain[5] + i1 * brain[6] + i2 * brain[7] + i3 * brain[8] + i4 * brain[9] + i5 * brain[50] + i6 * brain[54] else 0.0
+	var a2 := 1.0 if 0.0 < i0 * brain[10] + i1 * brain[11] + i2 * brain[12] + i3 * brain[13] + i4 * brain[14] + i5 * brain[51] + i6 * brain[55] else 0.0
+	var a3 := 1.0 if 0.0 < i0 * brain[15] + i1 * brain[16] + i2 * brain[17] + i3 * brain[18] + i4 * brain[19] + i5 * brain[52] + i6 * brain[56] else 0.0
 
-	var b0: float = max(0, a0 * brain[20] + a1 * brain[21] + a2 * brain[22] + a3 * brain[23])
-	var b1: float = max(0, a0 * brain[24] + a1 * brain[25] + a2 * brain[26] + a3 * brain[27])
-	var b2: float = max(0, a0 * brain[28] + a1 * brain[29] + a2 * brain[30] + a3 * brain[31])
+	var b0:= 1.0 if 0.0 < a0 * brain[20] + a1 * brain[21] + a2 * brain[22] + a3 * brain[23] else 0.0
+	var b1:= 1.0 if 0.0 < a0 * brain[24] + a1 * brain[25] + a2 * brain[26] + a3 * brain[27] else 0.0
+	var b2:= 1.0 if 0.0 < a0 * brain[28] + a1 * brain[29] + a2 * brain[30] + a3 * brain[31] else 0.0
 
-	var c0: float = max(0, b0 * brain[32] + b1 * brain[33] + b2 * brain[34])
-	var c1: float = max(0, b0 * brain[35] + b1 * brain[36] + b2 * brain[37])
-	var c2: float = max(0, b0 * brain[38] + b1 * brain[39] + b2 * brain[39])
+	var c0:= 1.0 if 0.0 < b0 * brain[32] + b1 * brain[33] + b2 * brain[34] else 0.0
+	var c1:= 1.0 if 0.0 < b0 * brain[35] + b1 * brain[36] + b2 * brain[37] else 0.0
+	var c2:= 1.0 if 0.0 < b0 * brain[38] + b1 * brain[39] + b2 * brain[39] else 0.0
 
 	var o0 := 1 if 0.0 < c0 * brain[40] + c1 * brain[41] + c2 * brain[42] else 0
 	var o1 := 2 if 0.0 < c0 * brain[43] + c1 * brain[44] + c2 * brain[45] else 0
