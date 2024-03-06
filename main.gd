@@ -52,6 +52,7 @@ func recreate_creatures() -> void:
 
 
 func _ready() -> void:
+	randomize()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	for _i in 200:
