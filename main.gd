@@ -31,7 +31,7 @@ func get_matrix() -> Predator:
 	return null
 
 
-func recreate_predators() -> void:
+func recreate_creatures() -> void:
 	if preys_count == 0:
 		for _i in 500:
 			add_child(Globals.create_prey())
@@ -88,8 +88,8 @@ func _unhandled_key_input(_event: InputEvent) -> void:
 
 
 func _process(_delta: float) -> void:
-	if predators_count <= 1 and preys_count > 0:
-		recreate_predators()
+	if predators_count <= 1:
+		recreate_creatures()
 	%PreysCount.text = "%d" % preys_count
 	%PredatorsCount.text = "%d" % predators_count
 
