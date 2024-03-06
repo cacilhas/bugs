@@ -1,9 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cn3v5buqxx1a7"]
+[gd_scene load_steps=12 format=3 uid="uid://cn3v5buqxx1a7"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_3nncy"]
-[ext_resource type="PackedScene" uid="uid://c2j5olbwgwb4y" path="res://predator.tscn" id="2_8ihjq"]
 [ext_resource type="PackedScene" uid="uid://cqxovfdylgye6" path="res://grass.tscn" id="2_fw8v0"]
-[ext_resource type="PackedScene" uid="uid://bil4npkbxb2u1" path="res://prey.tscn" id="3_td1ov"]
 [ext_resource type="FontFile" uid="uid://ct4gjy417a0ur" path="res://assets/acme.ttf" id="4_six8u"]
 [ext_resource type="Material" path="res://assets/ground.tres" id="5_4b06c"]
 [ext_resource type="PackedScene" uid="uid://cbsi8sa1oh681" path="res://pole.tscn" id="7_wwpba"]
@@ -36,8 +34,6 @@ height = 1000.0
 [node name="Main" type="Node3D"]
 script = ExtResource("1_3nncy")
 GrassScene = ExtResource("2_fw8v0")
-PredatorScene = ExtResource("2_8ihjq")
-PreyScene = ExtResource("3_td1ov")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4eqwy")

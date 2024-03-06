@@ -17,6 +17,19 @@ func add_brain(parent: PackedFloat32Array) -> void:
 	brain = Globals.mutate_brain(parent)
 
 
+func procreate() -> void:
+	var parent := get_parent()
+	if parent.can_create_more_preys():
+		scale = Vector3.ONE * 0.8
+		var child: Prey = Self.instantiate()
+		child.position.x = position.x
+		child.position.z = position.z
+		child.position.y = 2.0
+		child.rotate_y(randf() * TAU)
+		child.add_brain(brain)
+		parent.add_child(child)
+
+
 func _ready() -> void:
 	collision_layer = 3
 	collision_mask = 1
@@ -45,15 +58,7 @@ func _process(delta: float) -> void:
 
 	if age >= 30:
 		age /= 2.0
-		if get_parent().can_create_more_preys():
-			scale = Vector3.ONE * 0.8
-			var child: Prey = Self.instantiate()
-			child.position.x = position.x
-			child.position.z = position.z
-			child.position.y = 2.0
-			child.rotate_y(randf() * TAU)
-			child.add_brain(brain)
-			get_parent().add_child(child)
+		procreate()
 
 	var i0 := 1.0 if %RayCast1.is_colliding() else 0.0
 	var i1 := 1.0 if %RayCast2.is_colliding() else 0.0

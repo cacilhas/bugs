@@ -9,8 +9,6 @@ signal prey_has_died
 const SPEED := 400
 
 @export var GrassScene: PackedScene
-@export var PredatorScene: PackedScene
-@export var PreyScene: PackedScene
 
 var movement := Vector3.ZERO
 var mouse := Vector2.ZERO
@@ -26,6 +24,27 @@ func can_create_more_predators() -> bool:
 	return predators_count < 1000
 
 
+func recreate_predators() -> void:
+	if preys_count == 0:
+		for _i in 500:
+			add_child(Globals.create_prey())
+
+	if predators_count == 1:
+		for matrix in get_children():
+			if matrix is Predator:
+				matrix.age = 0.0
+				for _i in 99:
+					var pred := Globals.create_predator()
+					pred.add_brain(matrix.brain)
+					add_child(pred)
+				return
+
+	if predators_count == 0:
+		for _i in 100:
+			add_child(Globals.create_predator())
+
+
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -37,13 +56,9 @@ func _ready() -> void:
 		add_child(grass)
 
 	for i in 500:
-		var prey: Prey = PreyScene.instantiate()
-		prey.position = Globals.random_position(480.0)
-		add_child(prey)
+		add_child(Globals.create_prey())
 		if i % 5 == 0:
-			var pred: Predator = PredatorScene.instantiate()
-			pred.position = Globals.random_position(480.0)
-			add_child(pred)
+			add_child(Globals.create_predator())
 
 
 func _input(event: InputEvent) -> void:
@@ -67,12 +82,8 @@ func _unhandled_key_input(_event: InputEvent) -> void:
 
 
 func _process(_delta: float) -> void:
-	if predators_count == 0 and preys_count > 0:
-		for _i in 100:
-			var pred: Predator = PredatorScene.instantiate()
-			pred.position = Globals.random_position(480.0)
-			add_child(pred)
-
+	if predators_count <= 1 and preys_count > 0:
+		recreate_predators()
 	%PreysCount.text = "%d" % preys_count
 	%PredatorsCount.text = "%d" % predators_count
 

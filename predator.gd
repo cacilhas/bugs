@@ -17,6 +17,18 @@ func add_brain(parent: PackedFloat32Array) -> void:
 	brain = Globals.mutate_brain(parent)
 
 
+func procreate() -> void:
+	var parent := get_parent()
+	if parent.can_create_more_predators():
+		var child: Predator = Self.instantiate()
+		child.position.x = position.x
+		child.position.z = position.z
+		child.position.y = 2.0
+		child.rotate_y(randf() * TAU)
+		child.add_brain(brain)
+		parent.add_child(child)
+
+
 func _ready() -> void:
 	collision_layer = 5
 	collision_mask = 1
@@ -101,11 +113,5 @@ func _on_claw_body_entered(body: Prey) -> void:
 		if scale.x < 2.0:
 			scale *= 1.0625
 
-		if randf() < 0.5 and get_parent().can_create_more_predators():
-			var child: Predator = Self.instantiate()
-			child.position.x = position.x
-			child.position.z = position.z
-			child.position.y = 2.0
-			child.rotate_y(randf() * TAU)
-			child.add_brain(brain)
-			get_parent().add_child(child)
+		if randf() < 0.5:
+			procreate()
