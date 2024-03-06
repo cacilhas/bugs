@@ -6,7 +6,7 @@ signal predator_has_died
 signal prey_has_died
 
 
-const SPEED := 200
+const SPEED := 400
 
 @export var GrassScene: PackedScene
 @export var PredatorScene: PackedScene

@@ -2,7 +2,7 @@ class_name Prey
 extends CharacterBody3D
 
 
-const SPEED = 5.0
+const SPEED = 15.0
 const ANGLE = PI
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
