@@ -33,6 +33,7 @@ func _ready() -> void:
 		var grass := GrassScene.instantiate()
 		grass.rotate_y(randf() * TAU)
 		grass.position = Globals.random_position(500.0)
+		grass.scale = Vector3.ONE * (1.2 - randf() * 0.4)
 		add_child(grass)
 
 	for i in 500:

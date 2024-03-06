@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqxovfdylgye6"]
 
-[ext_resource type="PackedScene" uid="uid://dvyb56k0aljjj" path="res://assets/grass.glb" id="1_2ti34"]
+[ext_resource type="PackedScene" uid="uid://cxu15tdmxk6mx" path="res://assets/grass.glb" id="1_2ti34"]
 
 [node name="Grass" type="Node3D"]
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("1_2ti34")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -0.204606, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.882737, -1.06691, -0.395397)
