@@ -15,3 +15,8 @@ func mutate_neuron(neuron: float) -> float:
 	if randf() < TH32:
 		return neuron - randf() * TH64
 	return neuron
+
+
+func random_position(radius: float) -> Vector3:
+	var res := Vector3.FORWARD * randf() * radius
+	return res.rotated(Vector3.UP, randf() * TAU)

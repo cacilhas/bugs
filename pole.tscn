@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbsi8sa1oh681"]
+
+[ext_resource type="PackedScene" uid="uid://bwgjj3wr1wcdn" path="res://assets/totem.glb" id="1_20xd5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_quto6"]
+height = 13.0
+radius = 1.435
+
+[node name="Pole" type="StaticBody3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_20xd5")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -5.6207, 0, 2.14551)
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 0)
+shape = SubResource("CylinderShape3D_quto6")

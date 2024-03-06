@@ -32,19 +32,16 @@ func _ready() -> void:
 	for _i in 200:
 		var grass := GrassScene.instantiate()
 		grass.rotate_y(randf() * TAU)
-		grass.position.x = 250.0 - randf()*500.0
-		grass.position.z = 250.0 - randf()*500.0
+		grass.position = Globals.random_position(500.0)
 		add_child(grass)
 
 	for i in 500:
 		var prey: Prey = PreyScene.instantiate()
-		prey.position.x = 220.0 - randf()*440.0
-		prey.position.z = 220.0 - randf()*440.0
+		prey.position = Globals.random_position(480.0)
 		add_child(prey)
 		if i % 5 == 0:
 			var pred: Predator = PredatorScene.instantiate()
-			pred.position.x = 220.0 - randf()*440.0
-			pred.position.z = 220.0 - randf()*440.0
+			pred.position = Globals.random_position(480.0)
 			add_child(pred)
 
 
@@ -72,8 +69,7 @@ func _process(_delta: float) -> void:
 	if predators_count == 0 and preys_count > 0:
 		for _i in 100:
 			var pred: Predator = PredatorScene.instantiate()
-			pred.position.x = 220.0 - randf()*440.0
-			pred.position.z = 220.0 - randf()*440.0
+			pred.position = Globals.random_position(480.0)
 			add_child(pred)
 
 	%PreysCount.text = "%d" % preys_count

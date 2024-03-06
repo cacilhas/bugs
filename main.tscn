@@ -1,18 +1,37 @@
-[gd_scene load_steps=9 format=3 uid="uid://cn3v5buqxx1a7"]
+[gd_scene load_steps=14 format=3 uid="uid://cn3v5buqxx1a7"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_3nncy"]
 [ext_resource type="PackedScene" uid="uid://c2j5olbwgwb4y" path="res://predator.tscn" id="2_8ihjq"]
 [ext_resource type="PackedScene" uid="uid://cqxovfdylgye6" path="res://grass.tscn" id="2_fw8v0"]
 [ext_resource type="PackedScene" uid="uid://bil4npkbxb2u1" path="res://prey.tscn" id="3_td1ov"]
 [ext_resource type="FontFile" uid="uid://ct4gjy417a0ur" path="res://assets/acme.ttf" id="4_six8u"]
-[ext_resource type="Material" path="res://assets/ground.ptres.tres" id="5_e6bjq"]
+[ext_resource type="Material" path="res://assets/ground.tres" id="5_4b06c"]
+[ext_resource type="PackedScene" uid="uid://cbsi8sa1oh681" path="res://pole.tscn" id="7_wwpba"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_o1n5f"]
-size = Vector3(500, 0.1, 500)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jaeib"]
+sky_top_color = Color(0.411765, 0.635294, 0.807843, 1)
+sky_horizon_color = Color(0.290196, 0.521569, 0.686275, 1)
+ground_horizon_color = Color(0.290196, 0.521569, 0.686275, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_lokc4"]
-material = ExtResource("5_e6bjq")
-size = Vector3(500, 0.1, 500)
+[sub_resource type="Sky" id="Sky_54db3"]
+sky_material = SubResource("ProceduralSkyMaterial_jaeib")
+
+[sub_resource type="Environment" id="Environment_4eqwy"]
+background_mode = 2
+sky = SubResource("Sky_54db3")
+fog_density = 0.001
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_b1gh6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_coplj"]
+height = 0.1
+radius = 500.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ti6o3"]
+material = ExtResource("5_4b06c")
+top_radius = 500.0
+bottom_radius = 500.0
+height = 0.1
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_3nncy")
@@ -20,14 +39,21 @@ GrassScene = ExtResource("2_fw8v0")
 PredatorScene = ExtResource("2_8ihjq")
 PreyScene = ExtResource("3_td1ov")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4eqwy")
+camera_attributes = SubResource("CameraAttributesPractical_b1gh6")
+
 [node name="Boundaries" type="StaticBody3D" parent="."]
 
 [node name="Floor" type="CollisionShape3D" parent="Boundaries"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-shape = SubResource("BoxShape3D_o1n5f")
+shape = SubResource("CylinderShape3D_coplj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Boundaries"]
-mesh = SubResource("BoxMesh_lokc4")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("CylinderMesh_ti6o3")
+
+[node name="Pole" parent="." instance=ExtResource("7_wwpba")]
 
 [node name="Camera" type="Camera3D" parent="."]
 unique_name_in_owner = true
@@ -35,7 +61,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 50)
 current = true
 
 [node name="Light" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.923946, 0.382522, 0, -0.382522, 0.923946, 0, 70, 0)
+transform = Transform3D(1, 0, 0, 0, 0.906307, 0.422618, 0, -0.422618, 0.906307, 0, 70, 0)
 light_color = Color(1, 1, 0.831373, 1)
 shadow_enabled = true
 directional_shadow_mode = 0
