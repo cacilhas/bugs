@@ -6,15 +6,15 @@ const TH64 = 1. / 64.
 
 func mutate_brain(brain: PackedFloat32Array) -> PackedFloat32Array:
 	var child = PackedFloat32Array()
-	for neuron in brain:
-		child.append(mutate_neuron(neuron))
+	for gene in brain:
+		child.append(mutate_gene(gene))
 	return child
 
 
-func mutate_neuron(neuron: float) -> float:
+func mutate_gene(gene: float) -> float:
 	if randf() < TH32:
-		return neuron - randf() * TH64
-	return neuron
+		return gene - randf() * TH64
+	return gene
 
 
 func random_position(radius: float) -> Vector3:
