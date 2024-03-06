@@ -10,12 +10,14 @@ const TH64 = 1. / 64.
 func create_prey() -> Prey:
 	var prey: Prey = PreyScene.instantiate()
 	prey.position = random_position(480.0)
+	prey.rotate_y(randf() * TAU)
 	return prey
 
 
 func create_predator() -> Predator:
 	var pred: Predator = PredatorScene.instantiate()
 	pred.position = random_position(480.0)
+	pred.rotate_y(randf() * TAU)
 	return pred
 
 
