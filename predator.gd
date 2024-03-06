@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 	var i3 := 1.0 if %RayCast4.is_colliding() else 0.0
 	var i4 := 1.0 if %RayCast5.is_colliding() else 0.0
 
-	# Neurons from 49 to 52 are initiative neurons, they count as always-triggered inputs
+	# Genes from 49 to 52 are initiative ones, they count as always-triggered inputs for the first neuron layer
 	var a0 := 1.0 if 0.0 < i0 * brain[0] + i1 * brain[1] + i2 * brain[2] + i3 * brain[3] + i4 * brain[4] + brain[49] else 0.0
 	var a1 := 1.0 if 0.0 < i0 * brain[5] + i1 * brain[6] + i2 * brain[7] + i3 * brain[8] + i4 * brain[9] + brain[50] else 0.0
 	var a2 := 1.0 if 0.0 < i0 * brain[10] + i1 * brain[11] + i2 * brain[12] + i3 * brain[13] + i4 * brain[14] + brain[51] else 0.0
