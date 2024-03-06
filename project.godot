@@ -34,7 +34,7 @@ window/stretch/mode="viewport"
 
 [physics]
 
-3d/default_gravity=98.0
+3d/default_gravity=9.8
 
 [rendering]
 

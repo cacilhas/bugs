@@ -92,7 +92,9 @@ func _physics_process(delta: float) -> void:
 
 	if reaction & 1 > 0:
 		%AnimationPlayer.play("Walk")
-		velocity = Vector3.FORWARD.rotated(Vector3.UP, rotation.y) * SPEED
+		var aux = Vector3.FORWARD.rotated(Vector3.UP, rotation.y) * SPEED
+		velocity.x = aux.x
+		velocity.z = aux.z
 	else:
 		%AnimationPlayer.pause()
 		velocity.x = move_toward(velocity.x, 0, SPEED)
