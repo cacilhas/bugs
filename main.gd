@@ -36,17 +36,17 @@ func recreate_creatures() -> void:
 		for _i in 500:
 			add_child(Globals.create_prey())
 
+	var new_predators_count := 100
 	if predators_count > 0:
 		var matrix := get_matrix()
 		if matrix:
 			matrix.age = 0.0
-			for _i in 99:
+			for _i in 49:
 				var pred := matrix.procreate()
 				pred.position = Globals.random_position(480.0)
 				add_child(pred)
-			return
-
-	for _i in 100:
+			new_predators_count = 50
+	for _i in new_predators_count:
 		add_child(Globals.create_predator())
 
 
