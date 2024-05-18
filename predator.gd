@@ -38,7 +38,7 @@ func _ready() -> void:
 	self.tree_exited.connect(func(): parent.predator_has_died.emit())
 	%AnimationPlayer.speed_scale = 10
 	if brain.is_empty():
-		for _i in 53:
+		for _i in 58:
 			brain.append(1.0 - randf()*2.0)
 
 
@@ -62,24 +62,25 @@ func _process(delta: float) -> void:
 	var i2 := 1.0 if %RayCast3.is_colliding() else 0.0
 	var i3 := 1.0 if %RayCast4.is_colliding() else 0.0
 	var i4 := 1.0 if %RayCast5.is_colliding() else 0.0
+	var i5 := 1.0 if %RayCastFloor.is_colliding() else 0.0
 
 	# Genes from 49 to 52 are initiative ones, they count as always-triggered inputs for the first neuron layer
-	var a0 := 1.0 if 0.0 < i0 * brain[0] + i1 * brain[1] + i2 * brain[2] + i3 * brain[3] + i4 * brain[4] + brain[49] else 0.0
-	var a1 := 1.0 if 0.0 < i0 * brain[5] + i1 * brain[6] + i2 * brain[7] + i3 * brain[8] + i4 * brain[9] + brain[50] else 0.0
-	var a2 := 1.0 if 0.0 < i0 * brain[10] + i1 * brain[11] + i2 * brain[12] + i3 * brain[13] + i4 * brain[14] + brain[51] else 0.0
-	var a3 := 1.0 if 0.0 < i0 * brain[15] + i1 * brain[16] + i2 * brain[17] + i3 * brain[18] + i4 * brain[19] + brain[52] else 0.0
+	var a0 := 1.0 if 0.0 < i0 * brain[0] + i1 * brain[1] + i2 * brain[2] + i3 * brain[3] + i4 * brain[4] + i5 * brain[5] + brain[6]  else 0.0
+	var a1 := 1.0 if 0.0 < i0 * brain[7] + i1 * brain[8] + i2 * brain[9] + i3 * brain[10] + i4 * brain[11] + i5 * brain[12] + brain[13] else 0.0
+	var a2 := 1.0 if 0.0 < i0 * brain[14] + i1 * brain[15] + i2 * brain[16] + i3 * brain[17] + i4 * brain[18] + i5 * brain[19] + brain[20] else 0.0
+	var a3 := 1.0 if 0.0 < i0 * brain[21] + i1 * brain[22] + i2 * brain[23] + i3 * brain[24] + i4 * brain[25] + i5 * brain[26] + brain[27] else 0.0
 
-	var b0 := 1.0 if 0.0 < a0 * brain[20] + a1 * brain[21] + a2 * brain[22] + a3 * brain[23] else 0.0
-	var b1 := 1.0 if 0.0 < a0 * brain[24] + a1 * brain[25] + a2 * brain[26] + a3 * brain[27] else 0.0
-	var b2 := 1.0 if 0.0 < a0 * brain[28] + a1 * brain[29] + a2 * brain[30] + a3 * brain[31] else 0.0
+	var b0 := 1.0 if 0.0 < a0 * brain[28] + a1 * brain[29] + a2 * brain[30] + a3 * brain[31] else 0.0
+	var b1 := 1.0 if 0.0 < a0 * brain[32] + a1 * brain[33] + a2 * brain[34] + a3 * brain[35] else 0.0
+	var b2 := 1.0 if 0.0 < a0 * brain[36] + a1 * brain[37] + a2 * brain[38] + a3 * brain[39] else 0.0
 
-	var c0 := 1.0 if 0.0 < b0 * brain[32] + b1 * brain[33] + b2 * brain[34] else 0.0
-	var c1 := 1.0 if 0.0 < b0 * brain[35] + b1 * brain[36] + b2 * brain[37] else 0.0
-	var c2 := 1.0 if 0.0 < b0 * brain[38] + b1 * brain[39] + b2 * brain[39] else 0.0
+	var c0 := 1.0 if 0.0 < b0 * brain[40] + b1 * brain[41] + b2 * brain[42] else 0.0
+	var c1 := 1.0 if 0.0 < b0 * brain[43] + b1 * brain[44] + b2 * brain[45] else 0.0
+	var c2 := 1.0 if 0.0 < b0 * brain[46] + b1 * brain[47] + b2 * brain[48] else 0.0
 
-	var o0 := 1 if 0.0 < c0 * brain[40] + c1 * brain[41] + c2 * brain[42] else 0
-	var o1 := 2 if 0.0 < c0 * brain[43] + c1 * brain[44] + c2 * brain[45] else 0
-	var o2 := 4 if 0.0 < c0 * brain[46] + c1 * brain[47] + c2 * brain[48] else 0
+	var o0 := 1 if 0.0 < c0 * brain[49] + c1 * brain[50] + c2 * brain[51] else 0
+	var o1 := 2 if 0.0 < c0 * brain[52] + c1 * brain[53] + c2 * brain[54] else 0
+	var o2 := 4 if 0.0 < c0 * brain[55] + c1 * brain[56] + c2 * brain[57] else 0
 
 	reaction = o0 | o1 | o2
 

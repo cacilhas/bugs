@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c2j5olbwgwb4y"]
+[gd_scene load_steps=29 format=3 uid="uid://c2j5olbwgwb4y"]
 
 [ext_resource type="Script" path="res://predator.gd" id="1_v5vfw"]
 
@@ -414,8 +414,12 @@ _data = {
 radius = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3eq61"]
-radius = 2.0
+radius = 3.0
 height = 200.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lspvf"]
+radius = 2.0
+height = 50.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ej6rl"]
 radius = 0.8
@@ -655,29 +659,30 @@ shape = SubResource("CapsuleShape3D_3eq61")
 target_position = Vector3(0, 0, 0)
 collision_mask = 2
 
-[node name="RayCast2" type="RayCast3D" parent="."]
+[node name="RayCast2" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, 0, 0.5, -1)
-target_position = Vector3(0, 0, -50)
-collision_mask = 2
+transform = Transform3D(0.939693, 0.34202, -1.49502e-08, 0, -4.37114e-08, -1, -0.34202, 0.939693, -4.10753e-08, -8.194, 0.5, -22.513)
+shape = SubResource("CapsuleShape3D_lspvf")
 
-[node name="RayCast3" type="RayCast3D" parent="."]
+[node name="RayCast3" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 0, 0.5, -1)
-target_position = Vector3(0, 0, -50)
-collision_mask = 2
+transform = Transform3D(0.939693, -0.34202, 1.49502e-08, 0, -4.37114e-08, -1, 0.34202, 0.939693, -4.10753e-08, 8.194, 0.5, -22.513)
+shape = SubResource("CapsuleShape3D_lspvf")
 
-[node name="RayCast4" type="RayCast3D" parent="."]
+[node name="RayCast4" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 0, 0.5, -1)
-target_position = Vector3(0, 0, -50)
-collision_mask = 2
+transform = Transform3D(0.766045, 0.642788, -2.80971e-08, 0, -4.37114e-08, -1, -0.642788, 0.766045, -3.34849e-08, -15.3999, 0.5, -18.353)
+shape = SubResource("CapsuleShape3D_lspvf")
 
-[node name="RayCast5" type="RayCast3D" parent="."]
+[node name="RayCast5" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 0, 0.5, -1)
-target_position = Vector3(0, 0, -50)
-collision_mask = 2
+transform = Transform3D(0.766045, -0.642788, 2.80971e-08, 0, -4.37114e-08, -1, 0.642788, 0.766045, -3.34849e-08, 15.4, 0.5, -18.353)
+shape = SubResource("CapsuleShape3D_lspvf")
+
+[node name="RayCastFloor" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, -0.6, -5)
 
 [node name="Claw" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.75)

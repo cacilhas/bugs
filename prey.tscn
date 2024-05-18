@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bil4npkbxb2u1"]
+[gd_scene load_steps=27 format=3 uid="uid://bil4npkbxb2u1"]
 
 [ext_resource type="Script" path="res://prey.gd" id="1_pml8p"]
 
@@ -414,13 +414,8 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_m7kws"]
 radius = 1.0
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t178f"]
-radius = 1.5
-height = 20.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o4kvg"]
-radius = 1.0
-height = 20.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_aroqm"]
+radius = 10.0
 
 [node name="Prey" type="CharacterBody3D"]
 collision_layer = 3
@@ -652,43 +647,40 @@ shape = SubResource("SphereShape3D_m7kws")
 
 [node name="RayCast1" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, -10.737)
-shape = SubResource("CapsuleShape3D_t178f")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -10)
+shape = SubResource("SphereShape3D_aroqm")
 target_position = Vector3(0, 0, 0)
 collision_mask = 4
 
-[node name="RayCast2" type="RayCast3D" parent="."]
+[node name="RayCast2" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 0, 0.5, -1)
-target_position = Vector3(0, 0, -20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.51, 0.5, -3.09)
+shape = SubResource("SphereShape3D_aroqm")
+target_position = Vector3(0, 0, 0)
 collision_mask = 4
 
-[node name="RayCast3" type="RayCast3D" parent="."]
+[node name="RayCast3" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 0, 0.5, -1)
-target_position = Vector3(0, 0, -20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.51, 0.5, -3.09)
+shape = SubResource("SphereShape3D_aroqm")
+target_position = Vector3(0, 0, 0)
 collision_mask = 4
 
 [node name="RayCast4" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 10)
-shape = SubResource("CapsuleShape3D_o4kvg")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.88, 0.5, 8.09)
+shape = SubResource("SphereShape3D_aroqm")
 target_position = Vector3(0, 0, 0)
 collision_mask = 4
 
-[node name="RayCast5" type="RayCast3D" parent="."]
+[node name="RayCast5" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 0, 0.5, -1)
-target_position = Vector3(0, 0, -20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.88, 0.5, 8.09)
+shape = SubResource("SphereShape3D_aroqm")
+target_position = Vector3(0, 0, 0)
 collision_mask = 4
 
-[node name="RayCast6" type="RayCast3D" parent="."]
+[node name="RayCastFloor" type="RayCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0, 0.5, -1)
-target_position = Vector3(0, 0, -20)
-collision_mask = 4
-
-[node name="RayCast7" type="RayCast3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0.5, -1)
-target_position = Vector3(0, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, -0.6, -5)
