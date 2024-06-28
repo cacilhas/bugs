@@ -31,6 +31,14 @@ func get_matrix() -> Predator:
 	return null
 
 
+func save_creatures() -> void:
+	var creatures := []
+	for child in get_children():
+		if child is CharacterBody3D and child.brain:
+			creatures.append(child)
+	Globals.save_creatures(creatures)
+
+
 func recreate_creatures() -> void:
 	if preys_count == 0:
 		for _i in 500:
@@ -62,10 +70,15 @@ func _ready() -> void:
 		grass.scale = Vector3.ONE * (1.2 - randf() * 0.4)
 		add_child(grass)
 
-	for i in 500:
-		add_child(Globals.create_prey())
-		if i % 5 == 0:
-			add_child(Globals.create_predator())
+	var creatures := Globals.load_creatures()
+	if creatures.is_empty():
+		for i in 500:
+			add_child(Globals.create_prey())
+			if i % 5 == 0:
+				add_child(Globals.create_predator())
+	else:
+		for creature in creatures:
+			add_child(creature)
 
 
 func _input(event: InputEvent) -> void:
@@ -85,6 +98,7 @@ func _input(event: InputEvent) -> void:
 
 func _unhandled_key_input(_event: InputEvent) -> void:
 	if Input.is_action_just_released("ui_cancel"):
+		save_creatures()
 		get_tree().quit()
 
 
@@ -124,3 +138,7 @@ func _on_new_prey():
 func _on_new_predator():
 	predators_count += 1
 
+
+
+func _on_save_timeout():
+	save_creatures()

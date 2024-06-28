@@ -36,6 +36,10 @@ height = 1000.0
 script = ExtResource("1_3nncy")
 GrassScene = ExtResource("2_fw8v0")
 
+[node name="Save" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4eqwy")
 camera_attributes = SubResource("CameraAttributesPractical_b1gh6")
@@ -128,3 +132,4 @@ horizontal_alignment = 2
 [connection signal="new_prey" from="." to="." method="_on_new_prey"]
 [connection signal="predator_has_died" from="." to="." method="_on_predator_has_died"]
 [connection signal="prey_has_died" from="." to="." method="_on_prey_has_died"]
+[connection signal="timeout" from="Save" to="." method="_on_save_timeout"]

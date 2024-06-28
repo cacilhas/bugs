@@ -2,9 +2,43 @@ extends Node
 
 const TH32 = 1. / 32.
 const TH64 = 1. / 64.
+const STORE := "user://data.save"
 
 @onready var PredatorScene: PackedScene = preload("res://predator.tscn")
 @onready var PreyScene: PackedScene = preload("res://prey.tscn")
+
+
+func save_creatures(creatures_: Array) -> void:
+	var creatures := []
+	for creature in creatures_:
+		creatures.append(creature.to_dict())
+
+
+	var file := FileAccess.open(STORE, FileAccess.WRITE)
+	var info := {"creatures": creatures}
+	file.store_var(info, false)
+	file.close()
+
+
+func load_creatures() -> Array:
+	if not FileAccess.file_exists(STORE):
+		return []
+	var file := FileAccess.open(STORE, FileAccess.READ)
+	var info: Dictionary = file.get_var(false)
+	file.close()
+	var res := []
+
+	for asset in info.creatures:
+		if asset.brain.size() == 54:
+			var prey: Prey = PreyScene.instantiate()
+			prey.load_dict(asset)
+			res.append(prey)
+		elif asset.brain.size() == 58:
+			var predator: Predator = PredatorScene.instantiate()
+			predator.load_dict(asset)
+			res.append(predator)
+
+	return res
 
 
 func create_prey() -> Prey:
@@ -30,7 +64,7 @@ func mutate_brain(brain: PackedFloat32Array) -> PackedFloat32Array:
 
 func mutate_gene(gene: float) -> float:
 	if randf() < TH32:
-		return gene - randf() * TH64
+		return gene + TH32 - randf() * TH64
 	return gene
 
 

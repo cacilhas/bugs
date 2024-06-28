@@ -30,6 +30,25 @@ func procreate() -> Prey:
 	return child
 
 
+func to_dict() -> Dictionary:
+	return {
+		"brain": brain,
+		"reaction": reaction,
+		"age": age,
+		"position": position,
+		"rotation_y": rotation.y,
+	}
+
+
+func load_dict(info: Dictionary) -> void:
+	brain = info.brain
+	reaction = info.reaction
+	age = info.age
+	position = info.position
+	rotation.y = 0
+	rotate_y(info.rotation_y)
+
+
 func _ready() -> void:
 	collision_layer = 3
 	collision_mask = 1
