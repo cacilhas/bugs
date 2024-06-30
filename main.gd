@@ -111,10 +111,12 @@ func _process(delta: float) -> void:
 	%PredatorsCount.text = "%d" % predators_count
 	azimuth = fposmod(azimuth - 0.03125 * delta, TAU)
 	%Sun.rotation.x = azimuth
-	var horizon := _horizon_color(Color.hex(0x4a85af), Color.DARK_ORANGE)
-	%World.environment.sky.sky_material.sky_top_color = _sky_color(Color.hex(0x69a2ce))
+	var horizon := _horizon_color(Color.hex(0x4a85afff), Color.DARK_ORANGE)
+	%World.environment.sky.sky_material.sky_top_color = _sky_color(Color.hex(0x69a2ceff))
 	%World.environment.sky.sky_material.sky_horizon_color = horizon
 	%World.environment.sky.sky_material.ground_horizon_color = horizon
+	%Sun.light_color = _sun_color(Color.hex(0xffffd4ff), Color.RED)
+	%Tourch.visible = azimuth < PI
 
 
 func _sky_color(base: Color) -> Color:
@@ -126,6 +128,27 @@ func _sky_color(base: Color) -> Color:
 		if azimuth > TAU - 1.0:
 			sky_color = TAU - azimuth
 	return base * sky_color
+
+
+func _sun_color(high: Color, low: Color) -> Color:
+	var perc := 1.0 - (azimuth / TAU)
+
+	if perc < 0.1:
+		var ratio := clampf(perc * 10.0, 0.0, 1.0)
+		var r := low.r + (high.r - low.r) * ratio
+		var g := low.g + (high.g - low.g) * ratio
+		var b := low.b + (high.b - low.b) * ratio
+		return Color(r, g, b)
+
+	if perc < 0.5:
+		var ratio := clampf(perc * 10.0 - 4.0, 0.0, 1.0)
+		var r := high.r + (low.r - high.r) * ratio
+		var g := high.g + (low.g - high.g) * ratio
+		var b := high.b + (low.b - high.b) * ratio
+		return Color(r, g, b)
+
+	else:
+		return low
 
 
 func _horizon_color(high: Color, low: Color) -> Color:
