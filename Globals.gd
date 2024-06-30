@@ -8,25 +8,28 @@ const STORE := "user://data.save"
 @onready var PreyScene: PackedScene = preload("res://prey.tscn")
 
 
-func save_creatures(creatures_: Array) -> void:
+func save_creatures(creatures_: Array, azimuth: float) -> void:
 	var creatures := []
 	for creature in creatures_:
 		creatures.append(creature.to_dict())
 
 
 	var file := FileAccess.open(STORE, FileAccess.WRITE)
-	var info := {"creatures": creatures}
+	var info := {"creatures": creatures, "azimuth": azimuth}
 	file.store_var(info, false)
 	file.close()
 
 
-func load_creatures() -> Array:
+func load_creatures() -> Dictionary:
 	if not FileAccess.file_exists(STORE):
-		return []
+		return {"creatures": [], "azimuth": 0.0}
 	var file := FileAccess.open(STORE, FileAccess.READ)
 	var info: Dictionary = file.get_var(false)
 	file.close()
 	var res := []
+	var azimuth = 0.0
+	if info.has("azimuth"):
+		azimuth = info.azimuth
 
 	for asset in info.creatures:
 		if asset.brain.size() == 54:
@@ -38,7 +41,10 @@ func load_creatures() -> Array:
 			predator.load_dict(asset)
 			res.append(predator)
 
-	return res
+	return {
+		"creatures": res,
+		"azimuth": azimuth,
+	}
 
 
 func create_prey() -> Prey:
